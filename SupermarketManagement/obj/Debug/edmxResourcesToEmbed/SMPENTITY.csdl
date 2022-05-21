@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SMP_DBModel2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CAT_TB">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CAT_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CAT_Cover" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="PUR_TB" Relationship="Self.FK_PUR_TB_CAT_TB" FromRole="CAT_TB" ToRole="PUR_TB" />
+  </EntityType>
+  <EntityType Name="CUST_TB">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CUST_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CUST_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CUST_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CUST_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="PUR_TB">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cat_id" Type="Int32" />
+    <Property Name="Supp_id" Type="Int32" />
+    <Property Name="Pur_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Pur_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Pur_Cat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Pur_Supp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Pur_Det" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Pur_Buy" Type="Double" />
+    <Property Name="Pur_Sell" Type="Double" />
+    <Property Name="Pur_Qt" Type="Double" />
+    <Property Name="Pur_Tbuy" Type="Double" />
+    <Property Name="Pur_Tsell" Type="Double" />
+    <Property Name="Pur_TRev" Type="Double" />
+    <NavigationProperty Name="CAT_TB" Relationship="Self.FK_PUR_TB_CAT_TB" FromRole="PUR_TB" ToRole="CAT_TB" />
+    <NavigationProperty Name="SUPP_TB" Relationship="Self.FK_PUR_TB_SUPP_TB" FromRole="PUR_TB" ToRole="SUPP_TB" />
+  </EntityType>
+  <EntityType Name="SELL_TB">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Sell_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sell_Cust" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sell_Price" Type="Double" />
+    <Property Name="Sell_Qt" Type="Double" />
+    <Property Name="Sell_Tprice" Type="Double" />
+    <Property Name="Sell_Date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="SUPP_TB">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SUPP_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SUPP_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SUPP_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SUPP_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="PUR_TB" Relationship="Self.FK_PUR_TB_SUPP_TB" FromRole="SUPP_TB" ToRole="PUR_TB" />
+  </EntityType>
+  <EntityType Name="USER_TB">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="User_Pass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="User_Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="User_State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_PUR_TB_CAT_TB">
+    <End Role="CAT_TB" Type="Self.CAT_TB" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PUR_TB" Type="Self.PUR_TB" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAT_TB">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PUR_TB">
+        <PropertyRef Name="Cat_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PUR_TB_SUPP_TB">
+    <End Role="SUPP_TB" Type="Self.SUPP_TB" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PUR_TB" Type="Self.PUR_TB" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUPP_TB">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PUR_TB">
+        <PropertyRef Name="Supp_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SMP_DBEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CAT_TB" EntityType="Self.CAT_TB" />
+    <EntitySet Name="CUST_TB" EntityType="Self.CUST_TB" />
+    <EntitySet Name="PUR_TB" EntityType="Self.PUR_TB" />
+    <EntitySet Name="SELL_TB" EntityType="Self.SELL_TB" />
+    <EntitySet Name="SUPP_TB" EntityType="Self.SUPP_TB" />
+    <EntitySet Name="USER_TB" EntityType="Self.USER_TB" />
+    <AssociationSet Name="FK_PUR_TB_CAT_TB" Association="Self.FK_PUR_TB_CAT_TB">
+      <End Role="CAT_TB" EntitySet="CAT_TB" />
+      <End Role="PUR_TB" EntitySet="PUR_TB" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PUR_TB_SUPP_TB" Association="Self.FK_PUR_TB_SUPP_TB">
+      <End Role="SUPP_TB" EntitySet="SUPP_TB" />
+      <End Role="PUR_TB" EntitySet="PUR_TB" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

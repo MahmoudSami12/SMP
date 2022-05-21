@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="00f1fc53009c4a039d2cc45aca8d8f03" Name="Diagram1">
+        <EntityTypeShape EntityType="SMP_DBModel.CAT_TB" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMP_DBModel.SUPP_TB" Width="1.5" PointX="2.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMP_DBModel.PUR_TB" Width="1.5" PointX="5.375" PointY="0.5" />
+        <AssociationConnector Association="SMP_DBModel.FK_PUR_TB_CAT_TB" />
+        <AssociationConnector Association="SMP_DBModel.FK_PUR_TB_SUPP_TB" />
+        <EntityTypeShape EntityType="SMP_DBModel.CUST_TB" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SMP_DBModel.SELL_TB" Width="1.5" PointX="2.875" PointY="3.75" />
+        <EntityTypeShape EntityType="SMP_DBModel.USER_TB" Width="1.5" PointX="7.375" PointY="4.25" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
